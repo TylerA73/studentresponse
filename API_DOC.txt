@@ -1,0 +1,142 @@
+-- List of api URI's
+1. /api/v1/login (POST)
+    - Expects "username" + "password" in body (JSON)
+    - Returns:
+        - 200 (OK) if Login is OK.
+            - Will send JSON back indicating 2FA required for sign-in, or to be setup.
+        - 400 (Bad Request) when sent bad JSON.
+        - 401 (Unauthorized) if either Username/Password doesn't exist AND/OR is incorrect.
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+2. /api/v1/register (POST)
+    - Expects "username" + "password" + "firstname" + "lastname" in body (JSON)
+    - Returns:
+        - 200 (OK) if new user created is OK.
+        - 400 (Bad Request) when sent bad JSON.
+        - 409 (Conflict) when user already exists.
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+3. /api/v1/admins/users (GET)
+    - Expects none or all of the following parameters in the URI
+        - id
+        - un = username
+        - fn = firstname
+        - ln = lastname
+        - example = localhost:8080/api/v1/admin/users?un=test2
+    - Returns:
+        - 200 (OK) if new user created is OK.
+        - 400 (Bad Request) when sent bad JSON.
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+4. /api/v1/admins/users/{id:[0-9]+} (DELETE)
+    - Returns:
+        - 200 (OK) if user is deleted successfully.
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+5. /api/v1/admins/passwords/{id:[0-9]+} (PUT)
+    - Expects "password"  (JSON)
+    - Returns:
+        - 200 (OK) if new password is set
+        - 400 (Bad Request) when sent bad JSON.
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+6. /api/v1/users/passwords (PUT)
+    - Expects "password"  (JSON)
+    - Returns:
+        - 200 (OK) if new password is set
+        - 400 (Bad Request) when sent bad JSON.
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+7. /api/v1/users (DELETE)
+    - Returns:
+        - 200 (OK) if account is successfully deleted
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+8. /api/v1/teachers/classes (GET)
+    - Expects nothing
+    - Returns:
+        - 200 (OK) if list is class is retrived (null if no classes found for user)
+            - returns json array of classes
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+9. /api/v1/teachers/classes (POST)
+    - Expects "classname" as json
+    - Returns:
+        - 200 (OK) if class is created
+            - returns class code
+        - 400 (Bad Request) when sent bad JSON.
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+10. /api/v1/teachers/classes/{code} (DELETE)
+    - Expectss class code in URI
+    - Returns:
+        - 200 (OK) if class is deleted
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+11. /api/v1/teachers/classes/{code} (GET)
+    - Expectss class code in URI
+    - Returns:
+        - 200 (OK) with json list of question for that class
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+12. /api/v1/teachers/classes/{code} (POST)
+    - Expectss class code in URI AND json. example:
+    {
+	"question": {
+        "questiontext":"what color is the sun?"
+	},
+
+	"answers":	[
+	{
+		"answertext":"blue",
+		"iscorrect":false
+	}
+    }
+    - Returns:
+        - 200 (OK) question and its answers created
+        - 400 (Bad Request) when sent bad JSON.
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+13. /api/v1/teachers/questions/{qId:[0-9]+} (PUT)
+    - Expectss question id in URI and json similar to the above one in the create question uri
+    - Returns:
+        - 200 (OK) question updated
+        - 400 (Bad Request) when sent bad JSON.
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+13. /api/v1/teachers/questions/{qId:[0-9]+} (DELETE)
+    - Expectss question id in URI
+    - Returns:
+        - 200 (OK) question deleted
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+
+14. /api/v1/teachers/questions/{qId:[0-9]+} (GET)
+    - Expectss question id in URI
+    - Returns:
+        - 200 (OK) question and it's possible answers with counts  (this is the stats call)
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+
+15. /api/v1/admins/login (POST)
+    - Expects "username" + "password" in body (JSON)
+    - Returns:
+        - 200 (OK) if Login is OK.
+            - Will send JSON back indicating 2FA required for sign-in, or to be setup.
+                - "setup" means 2FA needs to be setup or passed on.
+                - "challenge" means 2FA is setup and requires a challenge.
+        - 400 (Bad Request) when sent bad JSON.
+        - 401 (Unauthorized) if either Username/Password doesn't exist AND/OR is incorrect.
+        - 500 (Internal Server Error) when Server errors occur (Check logs)
+
+16. /api/v1/2fa/qr (GET)
+    - Get the QR Code for a user whom has not yet set up 2FA.
+    - Generates TOTP_Secret / TOTP_Recovery strings
+    - Does not change isTOTPSetup, because the first verification code is required for proof (+ Sending Recovery key only on first time)
+    - Returns:
+        - 200 (OK): with PNG QR Code in body for rendering. (300px x 300px)
+        - 400 (Bad Request): If user already has 2FA setup.
+        - 500 (Internal Server Error)
+17. /api/v1/2fa/challenge (POST)
+    - Expects "code" in body (JSON)
+    - Returns:
+        - 200 (OK) Code accepted, full authorization was granted.
+        - 401 (Unauthorized) Code rejected, could be a timing issue, try again.
+        - 424 (Failed Dependency) User does not have a secret key generated yet. Getting the QR code will correct the problem.
+        - 500 (Internal Server Error)
+18. /api/v1/2fa/pass (POST)
+    - Does not expect a body.
+    - Only works on accounts that do not yet have 2fa setup.
+    - Returns:
+        - 200 (OK) 2FA Key set in Redis, OK to continue to other API methods.
+        - 403 (Forbidden) User account has 2FA setup, and must provide a valid challenge code to authenticate.
+
+19. /api/v1/teachers/classes/{code}/qrjoin
+    - Generate a QR Code for students to quickly join a class.
+    - Returns 200, regardless of code supplied, however a teacher must be logged in.
+    - Returns a 300x300 QR Code. (image/png)

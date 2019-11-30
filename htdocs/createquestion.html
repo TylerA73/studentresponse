@@ -1,0 +1,98 @@
+<html>
+<head>
+  <title>
+    Student Response System
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- BOOTSTRAP -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- /BOOTSTRAP -->
+
+  <!-- Vue JS library-->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- /VUEJS -->
+
+  <!-- Font awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/styles.css">
+  <!-- /Stylesheets -->
+
+  <script>
+      let username = sessionStorage.getItem("username");
+      if(username === null){
+        window.location.href = "index.html";
+      }
+    </script>
+</head>
+<body onload="loaded()">
+  <nav class="navbar navbar-expand-md navbar-dark">
+
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Student Response System</a>
+
+    <a href="login.html"><button class="btn btn-danger navbar-btn navbar-right" id="log-out-btn">Log Out</button></a>
+  </nav>
+
+  <!-- Fluid container -->
+  <div class="container-fluid">
+
+    <!-- Signup Controls -->
+    <div class="jumbotron">
+      <div>
+        Create Question
+      </div>
+        <div class="row" style="margin-bottom:15px; margin-top:15px;">
+          <input type="text" class="form-control" id="q-title" placeholder="Question title">
+          <div class="invalid-feedback w-100">Please enter the title of the question.</div>
+        </div>
+        <div id="q-type-button-container">
+          <button class="btn btn-outline-primary btn-login" id="mc-button">Multiple Choice</button>
+          <button class="btn btn-outline-primary btn-login" id="tf-button">True/False</button>
+        </div>
+        <div id="true-false-container" style="display: none">
+          <form>
+            <input type="radio" name="gender" value="true" onclick="pressTFRadio(this)" checked> True
+            <input type="radio" name="gender" value="false" onclick="pressTFRadio(this)"> False
+          </form>
+          <button class="btn btn-outline-primary btn-login" id="create-question-tf" onclick="submitAction()">Create Question</button>
+        </div>
+        <div id="response-textfield-container" style="display:none">
+          <ol type="A">
+            <transition-group name="fade">
+              <div v-for="(item, index) in items" v-bind:key="index" style="margin-top:15px">
+                <input name="correct" v-model="checked" :value="index" type="radio" style="position:absolute; left:40px; margin-top:9px;">
+                <li>
+                  <input class="form-control" v-model="item.value" style="width:300px;" placeholder="Response text">
+
+                  <a href="#" style="position:absolute; margin-top:-30px; left:400px;" v-on:click="removeResponse(index)">
+                      <i class="fa fa-trash" style="font-size:24px; color:white;"></i>
+                  </a>
+                </li>
+              </div>
+            </transition-group>
+          </ol>
+        <div class="row">
+          <button class="btn btn-outline-primary btn-login" id="add-response" @click="addResponse">Add Response</button>
+        </div>
+        <button class="btn btn-outline-primary btn-login" id="create-question-mc" onclick="submitAction()">Create Question</button>
+      </div>
+    </div>
+  </div>
+  <script src="scripts/createquestion.js"></script>
+  <script src="scripts/extras.js"></script>
+</body>
+</html>

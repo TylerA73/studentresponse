@@ -1,0 +1,8 @@
+# Ignore environment specific settings for development, but commit Sample file.
+.env
+*.exe
+!sample.env
+.vscode/
+
+# Default go build output filename.
+group1

@@ -1,0 +1,112 @@
+/* Variables */
+$slate: #25383C;
+$light-slate: #44575B;
+$dark_red: #3D2A26;
+$white: #fff;
+$main-font: helvetica;
+
+.navbar{
+	background-color: $dark_red;
+	font: $main-font;
+	margin-bottom: 15px;
+}
+
+body{
+	background-color: $slate;
+	font: $main-font;
+	color: $white;
+}
+
+.jumbotron{
+	text-align: center;
+	background-color: $light-slate;
+}
+
+.login-controls{
+	margin: auto;
+	padding-top: 15px;
+	width: 25%;
+}
+
+.btn-login{
+	border: 1px solid $dark_red;
+	color: $dark_red;
+	margin: 2px;
+}
+
+.btn-login:hover{
+	background-color: $dark_red;
+	border: 1px solid $dark_red;
+	color: $white;
+}
+
+.top-buffer{
+	margin-top:10px;
+}
+
+.center{
+	margin: auto;
+}
+
+.invalid{
+	color:red;
+}
+
+.slide-fade-enter-active {
+	transition: all .3s ease;
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+	transform: translateX(10px);
+	opacity: 0;
+}
+
+.btn:focus,
+.btn:active {
+	outline: none !important;
+	box-shadow: none;
+}
+
+#question-area{
+	color: black;
+}
+
+.card {
+	width: 80rem;
+	margin: auto;
+	padding-bottom: 1rem;
+}
+
+.answer-card {
+	width: 78rem;
+	margin: auto;
+	background-color: lightgray;
+}
+
+input[type="radio"] {
+	margin-right: 1em;
+}
+.fade-enter-active, .fade-leave-active {
+	transition: opacity 0.25s ease-out;
+  }
+  
+  .fade-enter, .fade-leave-to {
+	opacity: 0;
+  }
+
+#class-header {
+	display: block;
+	width: 80rem;
+	margin: auto;
+	padding-bottom: 1rem;
+}
+
+#card-header-title {
+	width: 40%;
+}
+
+#refresh-btn {
+	width: 5rem;
+	height: 5rem;
+}

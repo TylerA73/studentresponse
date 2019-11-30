@@ -1,0 +1,78 @@
+<html>
+<head>
+	<title>
+		Student Response System
+	</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- BOOTSTRAP -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<!-- /BOOTSTRAP -->
+
+	<!-- Vue JS library-->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!-- /VUEJS -->
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="/css/styles.css">
+	<!-- /Stylesheets -->
+
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark">
+
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Student Response System Administrator</a>
+
+		<!--Instructor Login Button-->
+		<a href="login.html"><button class="btn btn-danger navbar-btn navbar-right" id="login-btn">Login</button></a>
+
+	</nav>
+
+	<!-- Fluid container -->
+	<div class="container-fluid">
+		<!-- Login Controls -->
+		<div class="jumbotron">
+			<div>
+				<div class="text-danger" id="invalid-feedback-login" style="display:none">
+					Invalid login credentials.
+				</div>
+
+				Administrator Login
+			</div>
+			<div class="login-controls">
+				<div class="row">
+					<div class="container">
+						<input type="text" class="form-control" id="uname" name="uname" placeholder="Username">
+						<div class="invalid-feedback w-100">Please enter a username.</div>
+					</div>
+				</div>
+				<div class="row top-buffer">
+					<div class="container">
+						<input type="password" class="form-control" id="pass" name="password" placeholder="Password">
+						<div class="invalid-feedback w-100">Please enter a password.</div>
+					</div>
+				</div>
+				<div class="row top-buffer">
+					<div class="container">
+						<button class="btn btn-outline-primary btn-login" id="login-action-btn">Login</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="scripts/admin_login.js"></script>
+</body>
+</html>

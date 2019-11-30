@@ -1,0 +1,100 @@
+<html>
+<head>
+	<title>
+		Student Response System
+	</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- BOOTSTRAP -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<!-- /BOOTSTRAP -->
+
+	<!-- Vue JS library-->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!-- /VUEJS -->
+
+	<!-- Toastr JS & CSS library -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<!-- TOASTR -->
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/styles.css">
+	<!-- /Stylesheets -->
+
+	<script>
+		let username = sessionStorage.getItem("username");
+		let isAdmin = sessionStorage.getItem("isAdmin");
+		if(username !== null){
+			console.log(isAdmin);
+			if(isAdmin === "1"){
+				window.location.href = "admin.html";
+			}else if(isAdmin === "0"){
+				window.location.href = "instructor.html";
+			}
+		}
+	</script>
+</head>
+<body>
+	
+
+	<nav class="navbar navbar-expand-md navbar-dark">
+
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Student Response System</a>
+
+		<!--Instructor Login Button-->
+		<a href="login.html"><button class="btn btn-danger navbar-btn navbar-right" id="login-btn">Login</button></a>
+		<a href="admin_login.html"><button class="btn navbar-btn navbar-right" id="login-btn" style="margin-left:15px" >Admin Login</button></a>
+
+	</nav>
+
+	
+
+	<!-- Fluid container -->
+	<div class="container-fluid">
+
+		<div id="app">
+
+			<!-- Main -->
+			<div id="main">
+				<div class="jumbotron">
+					<div>
+						Welcome to the Student Response System!
+					</div>
+					<div class="login-controls">
+						<div class="row" id="join-class-area">
+							<a href="signup.html"><button class="btn btn-outline-primary btn-login" id="sign-up-btn">Instructor Signup</button></a>
+							<button v-on:click="showJoin" class="btn btn-outline-primary btn-login" id="enter-class-code-btn">Enter Class Code</button>
+							<transition name="slide-fade">
+								<div v-if="show" class="input-group mt-2" id="join-class">
+									<input type="text" class="form-control" id="class-input" placeholder="Enter class code">
+									<div class="input-group-append">
+										<button v-on:click="joinClass" class="btn btn-primary" id="join-class-btn">Join Class</button>
+									</div>
+								</div>
+							</transition>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="scripts/main.js"></script>
+</body>
+</html>
+
+
+

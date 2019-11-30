@@ -1,0 +1,74 @@
+<html>
+<head>
+  <title>
+    Student Response System
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- BOOTSTRAP -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- /BOOTSTRAP -->
+
+  <!-- Vue JS library-->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- /VUEJS -->
+
+  <!-- Font awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Google chart -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/styles.css">
+  <!-- /Stylesheets -->
+
+  <script>
+			let username = sessionStorage.getItem("username");
+			if(username === null){
+				window.location.href = "index.html";
+			}
+	</script>
+
+
+</head>
+<body >
+  <nav class="navbar navbar-expand-md navbar-dark">
+
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Student Response System</a>
+    <a href="login.html"><button class="btn btn-danger navbar-btn navbar-right" id="log-out-btn">Log Out</button></a>
+  </nav>
+
+  <!-- Fluid container -->
+  <div class="container-fluid" id="question">
+
+    <!-- Signup Controls -->
+    <div class="jumbotron">
+        <div id="question-title" >
+          Question: <span id="text-title" v-once>{{ qtext }} </span>
+        </div>
+        <br><br>
+        <div class="row align-items-center">
+            <div id="barchart" class="col-md-3 container h-100 d-flex justify-content-center"></div>
+            <div id="stackchart" class="col-md-3 container h-100 d-flex justify-content-center"></div>
+            <div id="piechart" class="col-md-3 container h-100 d-flex justify-content-center"></div>
+        </div>
+      </div>
+  </div>
+  <script src="scripts/logout.js"></script>
+  <script src="scripts/extras.js"></script>
+  <script src="scripts/statsquestion.js"></script>
+</body>
+</html>

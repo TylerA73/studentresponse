@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Student Response System
+	</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- BOOTSTRAP -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<!-- /BOOTSTRAP -->
+
+	<!-- Vue JS library-->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!-- /VUEJS -->
+
+	<!-- Font awesome-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/styles.css">
+	<!-- /Stylesheets -->
+
+	<script>
+			let username = sessionStorage.getItem("username");
+			if(username === null){
+				window.location.href = "index.html";
+			}
+	</script>
+</head>
+<body>
+	
+	<nav class="navbar navbar-expand-md navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Student Response System</a>
+
+		<!--Instructor Login Button-->
+		<a href="index.html"><button class="btn btn-danger navbar-btn navbar-right" id="log-out-btn">Log Out</button></a>
+
+	</nav>
+
+	<div class="login-controls" id="change-password-form" style="display:none">
+			<div class="row top-buffer">
+				<div class="container">
+					<input type="password" class="form-control" id="new-pass" name="password" placeholder="New password">
+					<div class="invalid-feedback w-100">Please enter a password.</div>
+				</div>
+			</div>
+			<div class="row top-buffer">
+				<div class="container">
+					<button onclick="changeUserPassword()" class="btn btn-primary" id="login-action-btn">Update Password</button>
+				</div>
+			</div>
+		</div>	
+
+	<!-- Fluid container -->
+	<div class="container-fluid" id="admin">
+		<div class="row">
+			<button class="btn btn-primary dropdown-toggle" data-toggle="collapse" data-target="#search">Search</button>
+		</div>
+		<div class="row collapse top-buffer" id="search">
+			<form>
+				<div class="form-group">
+					<input type="text" id="id" placeholder="User ID">
+				</div>
+				<div class="form-group">
+					<input type="text" id="uname" placeholder="Username">
+				</div>
+				<div class="form-group">
+					<input type="text" id="fname" placeholder="First Name">
+				</div>
+				<div class="form-group">
+					<input type="text" id="lname" placeholder="Last Name">
+				</div>
+				<button v-on:click="filterTable" type="button" class="btn btn-outline-info" id="search-btn">Search</button>
+			</form>
+		</div>
+		<div class="row top-buffer">
+			<table class="table table-striped" id="user-table">
+				<thead>
+					<tr>
+						<th>ID</th><th>Username</th><th>First Name</th><th>Last Name</th><th>isTOTPSetup</th><th>Admin</th><th>Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(user, index) in users">
+						<td>{{ user.userid }}</td>
+						<td>{{ user.username }}</td>
+						<td>{{ user.firstname }}</td>
+						<td>{{ user.lastname }}</td>
+						<td>{{ user.istotpsetup }}</td>
+						<td>{{ user.isadmin }}</td>
+						<td>
+								<button title="Change password" class="btn btn-primary navbar-btn navbar-right" id="login-btn" style="margin-right:10px" v-on:click="changePassword(user)">
+										<i class="fa fa-key" style="font-size:21px; color:white;"></i>
+								</button>
+								<button title="Delete user" class="btn btn-danger navbar-btn navbar-right" id="login-btn" v-on:click="deleteUser(index, user)">
+										<i class="fa fa-trash" style="font-size:21px; color:white;"></i>
+								</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
+	<script src="scripts/logout.js"></script>
+	<script src="scripts/admin.js"></script>
+</body>
+</html>

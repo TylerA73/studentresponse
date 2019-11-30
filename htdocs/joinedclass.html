@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <title>
+        Student Response System
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- BOOTSTRAP -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- /BOOTSTRAP -->
+
+    <!-- Vue JS library-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- /VUEJS -->
+
+    <!-- Toastr JS & CSS library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <!-- TOASTR -->
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- /Stylesheets -->
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-expand-md navbar-dark">
+
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Student Response System</a>
+
+        <!--Instructor Login Button-->
+        <a href="login.html">
+            <button class="btn btn-danger navbar-btn navbar-right" id="login-btn">Login</button>
+        </a>
+
+    </nav>
+
+
+
+    <!-- Fluid container -->
+    <div class="container-fluid">
+        <div id="question-area">
+            <div id="class-header">
+                <div class="card">
+                <h4 id="card-header-title" class="card-header">You are in class: {{className}}</h4>
+                <button v-on:click="refreshData" type="button" class="btn btn-primary btn-sm">
+                    Refresh
+                </button>
+                </div>
+            </div>
+            <single-question v-for="(question, index) in questions" v-bind:key="question.questionId" v-bind:question="question"
+                v-bind:id="question.questionId" v-bind:index="index" v-bind:response="response"></single-question>
+        </div>
+    </div>
+
+    <script src="scripts/joinedclass.js"></script>
+</body>
+
+</html>
